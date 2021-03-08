@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://koda.nu/simple.js">
+        updatesPerSecond = 240;
+        
+        var cat = {x: 100, y: 100};
+        var mouse = {x: 500, y: 500};
+
+        function update()
+        {
+          clearScreen();
+          circle(500,100,100,"green")
+
+          circle(mouse.x, mouse.y, 20, "red");
+          if (keyboard.right) { mouse.x += 2.5};
+          if (keyboard.left) { mouse.x -= 2.5};
+          if (keyboard.up) { mouse.y -= 2.5};
+          if (keyboard.down) { mouse.y += 2.5};
+          
+          circle(cat.x, cat.y, 20, "blue");
+          if (keyboard.d) { cat.x += 2};
+          if (keyboard.a) { cat.x -= 2};
+          if (keyboard.w) { cat.y -= 2};
+          if (keyboard.s) { cat.y += 2};
+          
+          var d = distance(mouse.x,mouse.y, cat.x,cat.y);
+          
+          if (d < 40){
+            alert("Game over!");
+            stopUpdate();
+          }
+          var d_maze = distance(cat.x,cat.y, 500, 100);
+          if (d_maze < 100){
+              alert("Game over!")
+              stopUpdate();
+          }
+        }
+      
+      </script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>

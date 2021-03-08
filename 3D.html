@@ -1,0 +1,44 @@
+<script src="http://koda.nu/simple3d.js">
+
+    // Rita två enkla saker:
+    box(300, 300, -300, 30, 30, 30, "blue");
+    box(0, -100, 0, 3000, 30, 3000, "http://koda.nu/bilder/3d/ground.png", 15, 15);
+    
+    // Rita tre saker till, men spara på dem
+    // så att vi kan rotera dem senare
+    var t = tetrahedron(-200, 49, 0, 100, "orange");
+    var b = box(300, 100, 0, 200, 200, 200, "http://koda.nu/bilder/3d/bricks1.png");   
+    var s = sphere(0, 200, 0, 100, "3D-grafik-test.jpg");
+      
+    // Rita ut en 3D-modell, spara på den också
+    // så att vi kan rotera den senare
+    var earthman = loadModel(0, -80, 0, 'http://koda.nu/obj/male02.obj', 'http://koda.nu/bilder/3d/earth.png');
+  
+    // Lite lampor
+    pointLight(700, 50, 330, "rgb(255,255,255)", 1);
+    pointLight(-700, 500, 330, "rgb(255,255,255)", 0.5);
+    ambientLight("rgb(100,100,100)");
+    
+    function update() 
+    {   
+      if (keyboard.a)     { moveCameraX(-6); }
+      if (keyboard.d)     { moveCameraX(6);  }
+      if (keyboard.w)     { moveCameraZ(-6); }
+      if (keyboard.s)     { moveCameraZ(6);  }
+      if (keyboard.space) { moveCameraY(6);  }
+      if (keyboard.shift) { moveCameraY(-6); }
+      if (keyboard.c && keyboard.w) { moveCameraZ(-13); }
+      
+      
+      b.rotateY(0.01);
+      b.rotateX(0.01);
+      b.rotateZ(0.01);
+      
+      t.rotateY(0.05);
+      
+      s.rotateY(0.01);
+      
+      earthman.rotateY(-0.01);
+    }
+    
+  </script>
