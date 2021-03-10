@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://koda.nu/simple.js">
+        updatesPerSecond = 240;
+        
+        var cat = {x: 100, y: 100, speed: 5};
+        var mouse = {x: 1000, y: 600, speed: 7};
+
+        hideMouse();
+
+        playSound("http://spelprogrammering.nu/ljud/musik/Arkanoid_PSID_01.mp3", 0.5);
+
+        function update()
+        {
+          fill("black");
+
+          picture(mouse.x, mouse.y, "http://spelprogrammering.nu/bilder/xwing.png");
+          if (keyboard.right) { mouse.x += mouse.speed};
+          if (keyboard.left) { mouse.x -= mouse.speed};
+          if (keyboard.up) { mouse.y -= mouse.speed};
+          if (keyboard.down) { mouse.y += mouse.speed};
+          
+          picture(cat.x, cat.y, "http://spelprogrammering.nu/bilder/tie.png");
+          if (keyboard.d) { cat.x += cat.speed};
+          if (keyboard.a) { cat.x -= cat.speed};
+          if (keyboard.w) { cat.y -= cat.speed};
+          if (keyboard.s) { cat.y += cat.speed};
+          
+          var d = distance(mouse, cat);
+          
+          if (d < 40){
+            stopSound("http://spelprogrammering.nu/ljud/musik/Arkanoid_PSID_01.mp3");
+            playSound("http://spelprogrammering.nu/ljud/effekter/SourceSound/sfx/explosion1.wav");
+            text(500,300,40, "Game over!", "red");
+            text(460,350,20, "Press \"crtl + r\" to restart", "purple");
+            showMouse();
+            stopUpdate();
+          }
+        }
+      
+      </script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
