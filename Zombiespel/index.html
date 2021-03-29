@@ -7,11 +7,11 @@
             var zombies = [];
             var i = 0;
 
-            while (i < 10){
+            while (i < 5){
                 zombies.push({x: random(totalWidth),
                         y: random(totalHeight),
                         size: 20,
-                        speed: random(1,5)});
+                        speed: random(1,3)});
 
                 i += 1;
             }
@@ -21,14 +21,14 @@
                           speed: 8};
 
         function update(){
-            fill("green");
+            fill("red");
             rectangle(10, 10 , totalWidth-20, totalHeight-20, "black");
 
             var i = 0;
 
-            while (i < 10){
+            while (i < 5){
                 var zombie = zombies[i];
-                circle(zombie.x, zombie.y, zombie.size, 'red');
+                picture(zombie.x, zombie.y, 'Pac-man_Ghost_blue.png');
                 if (zombie.x < player.x) { zombie.x += zombie.speed; }
                 if (zombie.x > player.x) { zombie.x -= zombie.speed; }
                 if (zombie.y < player.y) { zombie.y += zombie.speed; }
@@ -45,7 +45,7 @@
             }
 
             //picture(zombie.x, zombie.y, "https://spelprogrammering.nu/bilder/zombie.png");
-            circle(player.x, player.y, 20, 'blue');
+            picture(player.x, player.y, 'Pac-man.png');
 
             if (keyboard.w) { player.y -= player.speed; }
             if (keyboard.a) { player.x -= player.speed; }
