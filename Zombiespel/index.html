@@ -4,17 +4,47 @@
     <script src="https://koda.nu/simple.js">
             updatesPerSecond = 144;
             
-            var zombie = {x: random(totalWidth),
-                      y: random(totalHeight),
-                      speed: random(1,5)};
+            var zombies = [];
+            var i = 0;
+
+            while (i < 10){
+                zombies.push({x: random(totalWidth),
+                        y: random(totalHeight),
+                        size: 20,
+                        speed: random(1,5)});
+
+                i += 1;
+            }
+
             var player = {x: totalWidth/2,
                           y: totalHeight/2,
-                          speed: 7};
+                          speed: 8};
 
         function update(){
-            clearScreen();
+            fill("green");
+            rectangle(10, 10 , totalWidth-20, totalHeight-20, "black");
 
-            picture(zombie.x, zombie.y, "https://spelprogrammering.nu/bilder/zombie.png");
+            var i = 0;
+
+            while (i < 10){
+                var zombie = zombies[i];
+                circle(zombie.x, zombie.y, zombie.size, 'red');
+                if (zombie.x < player.x) { zombie.x += zombie.speed; }
+                if (zombie.x > player.x) { zombie.x -= zombie.speed; }
+                if (zombie.y < player.y) { zombie.y += zombie.speed; }
+                if (zombie.y > player.y) { zombie.y -= zombie.speed; }
+
+                var maxDistance = 20;
+
+                if (distance(zombie, player) < maxDistance){
+                alert("Game over!");
+                stopUpdate();
+            }
+
+                i += 1;
+            }
+
+            //picture(zombie.x, zombie.y, "https://spelprogrammering.nu/bilder/zombie.png");
             circle(player.x, player.y, 20, 'blue');
 
             if (keyboard.w) { player.y -= player.speed; }
@@ -22,15 +52,6 @@
             if (keyboard.s) { player.y += player.speed; }
             if (keyboard.d) { player.x += player.speed; }
 
-            if (zombie.x < player.x) { zombie.x += zombie.speed; }
-            if (zombie.x > player.x) { zombie.x -= zombie.speed; }
-            if (zombie.y < player.y) { zombie.y += zombie.speed; }
-            if (zombie.y > player.y) { zombie.y -= zombie.speed; }
-
-            if (distance(zombie, player) < 5){
-                alert("Game over!");
-                stopUpdate();
-            }
         }
       </script>
     <meta charset="UTF-8">
