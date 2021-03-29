@@ -28,7 +28,7 @@
 
             while (i < 5){
                 var zombie = zombies[i];
-                picture(zombie.x, zombie.y, 'Pac-man_Ghost_blue.png');
+                picture(zombie.x, zombie.y, 'Bilder/Pac-man_Ghost_blue.png');
                 if (zombie.x < player.x) { zombie.x += zombie.speed; }
                 if (zombie.x > player.x) { zombie.x -= zombie.speed; }
                 if (zombie.y < player.y) { zombie.y += zombie.speed; }
@@ -45,7 +45,7 @@
             }
 
             //picture(zombie.x, zombie.y, "https://spelprogrammering.nu/bilder/zombie.png");
-            picture(player.x, player.y, 'Pac-man.png');
+            picture(player.x, player.y, 'Bilder/Pac-man.png');
 
             if (keyboard.w) { player.y -= player.speed; }
             if (keyboard.a) { player.x -= player.speed; }
