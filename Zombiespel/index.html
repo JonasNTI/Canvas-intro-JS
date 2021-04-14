@@ -2,8 +2,10 @@
 <html lang="en">
 <head>
     <script src="https://koda.nu/simple.js">
-            updatesPerSecond = 144;
+            updatesPerSecond = 60;
             
+            // Variables player & zombies
+//            var player = {x: totalWidth/2, y: totalHeight/2, speed: 6};
             var zombies = [];
             var i = 0;
 
@@ -11,32 +13,33 @@
                 zombies.push({x: random(totalWidth),
                         y: random(totalHeight),
                         size: 20,
-                        speed: random(1,3)});
+                        speed: random(1,4)});
 
                 i += 1;
             }
-
-            var player = {x: totalWidth/2,
-                          y: totalHeight/2,
-                          speed: 8};
 
         function update(){
             fill("red");
             rectangle(10, 10 , totalWidth-20, totalHeight-20, "black");
 
+
+            text(totalWidth-150,80,40, "Test", "blue")
+
+            picture(mouse.x - 40, mouse.y - 40, 'Bilder/Pac-man.png');
+
             var i = 0;
 
             while (i < 5){
                 var zombie = zombies[i];
-                picture(zombie.x, zombie.y, 'Bilder/Pac-man_Ghost_blue.png');
-                if (zombie.x < player.x) { zombie.x += zombie.speed; }
-                if (zombie.x > player.x) { zombie.x -= zombie.speed; }
-                if (zombie.y < player.y) { zombie.y += zombie.speed; }
-                if (zombie.y > player.y) { zombie.y -= zombie.speed; }
+                picture(zombie.x - 25, zombie.y - 20, 'Bilder/Pac-man_Ghost_blue.png');
+                if (zombie.x < mouse.x) { zombie.x += zombie.speed; }
+                if (zombie.x > mouse.x) { zombie.x -= zombie.speed; }
+                if (zombie.y < mouse.y) { zombie.y += zombie.speed; }
+                if (zombie.y > mouse.y) { zombie.y -= zombie.speed; }
 
-                var maxDistance = 20;
+                var maxDistance = 50;
 
-                if (distance(zombie, player) < maxDistance){
+                if (distance(zombie, mouse) < maxDistance){
                 alert("Game over!");
                 stopUpdate();
             }
@@ -44,13 +47,10 @@
                 i += 1;
             }
 
-            //picture(zombie.x, zombie.y, "https://spelprogrammering.nu/bilder/zombie.png");
-            picture(player.x, player.y, 'Bilder/Pac-man.png');
-
-            if (keyboard.w) { player.y -= player.speed; }
-            if (keyboard.a) { player.x -= player.speed; }
-            if (keyboard.s) { player.y += player.speed; }
-            if (keyboard.d) { player.x += player.speed; }
+//            if (keyboard.w) { player.y -= player.speed; }
+//            if (keyboard.a) { player.x -= player.speed; }
+//            if (keyboard.s) { player.y += player.speed; }
+//            if (keyboard.d) { player.x += player.speed; }
 
         }
       </script>
