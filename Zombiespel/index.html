@@ -4,11 +4,17 @@
     <script src="https://koda.nu/simple.js">
             updatesPerSecond = 60;
             
-            // Variables player & zombies
-//            var player = {x: totalWidth/2, y: totalHeight/2, speed: 6};
+            // Variables
+            var player = {x: totalWidth/2, y: totalHeight/2, speed: 8};
             var zombies = [];
             var i = 0;
+            var tenthOfaSecond = 0;
+            var sec = 0;
+            var min = 0;
+            var hr = 0;
+            var spaceCount = 0;
 
+            // Creating the zombies (ghosts)
             while (i < 5){
                 zombies.push({x: random(totalWidth),
                         y: random(totalHeight),
@@ -22,34 +28,53 @@
             fill("red");
             rectangle(10, 10 , totalWidth-20, totalHeight-20, "black");
 
-            text(totalWidth-150,80,40, "Test", "blue")
+            picture(player.x-40, player.y-40, 'Bilder/Pac-man.png');
 
-            picture(mouse.x-40, mouse.y-40, 'Bilder/Pac-man.png');
+            // Keeping track of time
+            tenthOfaSecond += 1;
+            if (tenthOfaSecond == 60){ sec += 1; tenthOfaSecond = 0; }
+            if (sec == 60){ min += 1; sec = 0; }
+            if (min == 60){ hr += 1; min == 0 }
 
+            if (sec < 10){ text(40,80,30, '0' + sec, "blue") }
+            else { text(40,80,30, sec, "blue") }
+
+            if (min < 10){ text(90,80,30, ':0' + min, "blue") }
+            else { text(90,80,30, ':' + min, "blue") }
+
+            if (hr < 10){ text(160,80,30, ':0' + hr, "blue") }
+            else { text(160,80,30, ':' + hr, "blue") }
+
+            
+            // Giving the zombies visuals and making them all chase the player
             var i = 0;
-
             while (i < 5){
                 var zombie = zombies[i];
-                picture(zombie.x - 25, zombie.y - 20, 'Bilder/Pac-man_Ghost_blue.png');
-                if (zombie.x < mouse.x) { zombie.x += zombie.speed; }
-                if (zombie.x > mouse.x) { zombie.x -= zombie.speed; }
-                if (zombie.y < mouse.y) { zombie.y += zombie.speed; }
-                if (zombie.y > mouse.y) { zombie.y -= zombie.speed; }
+                picture(zombie.x-25, zombie.y-20, 'Bilder/Pac-man_Ghost_blue.png');
 
+                if (zombie.x < player.x) { zombie.x += zombie.speed; }
+                if (zombie.x > player.x) { zombie.x -= zombie.speed; }
+                if (zombie.y < player.y) { zombie.y += zombie.speed; }
+                if (zombie.y > player.y) { zombie.y -= zombie.speed; }
+
+                // Stopping game if any of the zombies gets too close to the player
                 var maxDistance = 50;
-
-                if (distance(zombie, mouse) < maxDistance){
+                if (distance(zombie, player) < maxDistance){
                 alert("Game over!");
                 stopUpdate();
             }
-
                 i += 1;
             }
 
-//            if (keyboard.w) { player.y -= player.speed; }
-//            if (keyboard.a) { player.x -= player.speed; }
-//            if (keyboard.s) { player.y += player.speed; }
-//            if (keyboard.d) { player.x += player.speed; }
+            if (keyboard.w) { player.y -= player.speed; }
+            if (keyboard.a) { player.x -= player.speed; }
+            if (keyboard.s) { player.y += player.speed; }
+            if (keyboard.d) { player.x += player.speed; }
+
+            if (player.x >= totalWidth-52){ player.x = totalWidth-53; }
+            if (player.x <= 47){ player.x = 48; }
+            if (player.y >= totalHeight-53){ player.y = totalHeight-54; }
+            if (player.y <= 48){ player.y = 49; }
 
         }
       </script>
